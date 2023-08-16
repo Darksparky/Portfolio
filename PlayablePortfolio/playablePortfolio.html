@@ -1,0 +1,295 @@
+<!Doctype=HTML>
+<title>CWPC's Portfolio - Level Design Portfolio</title>
+<Head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <style>
+        #PlayLink{
+            color: #FFF;
+            text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-decoration: none; 
+        }
+        #HomeLink, #DungeonLink, #MobLink, #OTTLink{
+            color: #2C5A2B;
+            text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-decoration: none;
+        }
+    </style>
+</Head>
+<body>
+    <div class="navbar">
+        <div class="navlink">
+            <a id="HomeLink" href="../index.html">Home</a>            
+        </div>
+        <div class="navlink">
+            <a id="PlayLink" href="playablePortfolio.html">Level Design</a>
+        </div>
+        <div class="navlink">
+            <a id="DungeonLink" href="../DungeonGame/dungeon.html">Dungeon Game</a>
+        </div>
+        <div class="navlink">
+            <a id ="MobLink" href="../MobMentality/MobMentality.html">Mob Mentality</a>
+        </div>
+        <div class="navlink">
+            <a id="OTTLink" href="../OTT/OTTpage.html">One Touch Templar</a>
+        </div>
+    </div>
+    <div class="mainbody">
+        <div class="webglFrame">
+                <div id="unity-container" class="unity-desktop">
+                <canvas id="unity-canvas" width=1280 height=720></canvas>
+                <div id="unity-loading-bar">
+                    <div id="unity-logo"></div>
+                    <div id="unity-progress-bar-empty">
+                        <div id="unity-progress-bar-full"></div>
+                    </div>
+                </div>
+                <div id="unity-warning"> </div>
+                <div id="unity-footer">
+                    <div id="unity-webgl-logo"></div>
+                    <div id="unity-fullscreen-button"></div>
+                    <div id="unity-build-title">Level Design Portfolio</div>
+                </div>
+            </div>
+        </div>   
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Build9.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Build9.data.unityweb",
+        frameworkUrl: buildUrl + "/Build9.framework.js.unityweb",
+        codeUrl: buildUrl + "/Build9.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Level Design Portfolio",
+        productVersion: "0.1.0",
+        showBanner: unityShowBanner,
+      };
+
+        
+        
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "1280px";
+        canvas.style.height = "720px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+        </div>
+        <div class ="textbody">
+            <h1>Controls</h1>
+            <ul>
+                <li>"WASD" to move</li>
+                <li>Mouse to aim</li>
+                <li>"E" to interact with things (view and exit pictures) </li>
+                <li>"Spacebar" to view available reference/whiteboxes.</li>
+            </ul>
+            <h1>About the Playable Portfolio</h1>
+            <p>
+                This “game” is meant to be an interactive portfolio experience with a focus on level design. The “game”, in and of itself, is also meant as a portfolio piece.  It is made using the Unity game engine and contains images of work done in other engines(predominantly work done in Unreal Engine 5). The assets used and in this portfolio were not made by me. They are all purchased assets from the asset store.
+            </p> 
+
+            <p>
+                While I have the skills and education to create rudimentary assets in a pinch, I am not aiming to be an environment artist. My interest is in creating experiences, be it through programming or level design, akin to those that inspired me while growing up and continue to inspire me to this day
+            </p>
+            <h1>Showcased Work</h1>
+            <h2>Forest Falls</h2>
+            <p>
+                The wooded waterfall area was made in Unreal Engine 5 for a school assignment. It was one of the first things I had made in Unreal Engine 5 and it was intended as practice using terrain deformation, foliage, and more photo realistic assets(as opposed to the low poly assets I generally use).
+            </p>
+            <p>
+                The concept behind this area was that of a short reprieve between areas of high intensity in a hypothetical linear action game. This would be something akin to the room before a boss fight, or a small area of safety in a horror game.
+            </p>
+            <div class="imageScroll">
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-2-ClarkeChristopher-final-01.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-1-ClarkeChristopher-greybox-01.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-2-ClarkeChristopher-final-02.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-1-ClarkeChristopher-greybox-02.png">
+                </div>    
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-2-ClarkeChristopher-final-03.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-1-ClarkeChristopher-greybox-03.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-2-ClarkeChristopher-final-04.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-1-ClarkeChristopher-greybox-04.png">
+                </div>
+
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-2-ClarkeChristopher-final-05.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-1-ClarkeChristopher-greybox-05.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-2-ClarkeChristopher-final-06.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A3-1-ClarkeChristopher-greybox-06.png">
+                </div>
+            </div>
+            <h2>Decrepit Dungeon</h2>
+            <p>
+                This was made in Unreal Engine 5 for a school assignment.
+            </p>
+            <p>
+                Under a large medieval walled city, this dungeon for housing prisoners cuts across the city's sewage. The prison is for the most violent of offenders, and it always has guards present. It uses the sewage canal as a moat to separate the guards quarters from the rest of the prison just in case someone, or something, gets out of the depths of the prison. While the place is in a general state of disrepair, the walls to the break room were never rebuilt as the openings provided the guards a solid vantage point to watch the prisoners. I was going for a retro dungeon crawler aesthetic. I focused on trying to get interesting atmosphere, color, and lighting. I am aiming for the kind of thing you would find in old baldur’s gate games mixed with skyrim, zelda, and dark souls influences. 
+            </p>
+            <div class="imageScroll">
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-final-01.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-greybox-01.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-final-02.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-greybox-02.png">
+                </div>    
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-final-03.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-greybox-03.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-final-04.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-greybox-04.png">
+                </div>
+
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-final-05.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-greybox-05.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-final-06.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-greybox-06.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-2-ClarkeChristopher-build-3-full.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A4-1-ClarkeChristopher-overview-greybox.png">
+                </div>
+            </div>
+            <h2>Downtown Deathmatch</h2>
+            <p>
+                This was made in Unreal Engine 5 for a school assignment.
+            </p>
+            <p>
+                I aimed to create a theoretical multiplayer map for a team-deathmatch style of game. This map would be in a walled off part of 
+                a downtown block. It would have hypothetically happened in a zombie outbreak. The area was walled off and support workers entered the zone before abandoning their positions as the outbreak became unmanagable.
+            </p>
+            <p>
+                I am paying attention to elements like leaving room for safe places to spawn, as well as playing attention and to the number of long lines of sight, because this is meant to be a multiplayer map. I used lots of abandoned
+                vehicles, barricades, and overgrowth to break up lines of sight and add to the visual storytelling.
+            </p>
+
+
+            <div class="imageScroll">
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-final-01.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-greybox-01.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-final-02.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-greybox-02.png">
+                </div>    
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-final-03.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-greybox-03.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-final-04.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-greybox-04.png">
+                </div>
+
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-final-05.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-greybox-05.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-final-06.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-greybox-06.png">
+                </div>
+                <div class="column">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-2-ClarkeChristopher-render-lit.png">
+                    <img class="showcaseImage" src="PlayablePortfolioImages/ITEC4020-A6-1-ClarkeChristopher-overview-greybox.png">
+                </div>
+            </div>
+        </div>
+
+</body>

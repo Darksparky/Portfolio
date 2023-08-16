@@ -1,0 +1,170 @@
+<!Doctype=HTML>
+<title>CWPC's Portfolio - Home Page</title>
+<Head>
+    <link rel="stylesheet" type="text/css" href="../main.css"/>
+    <style>
+        #OTTLink{
+            color: #FFF;
+            text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-decoration: none; 
+        }
+        #HomeLink, #PlayLink, #DungeonLink, #MobLink{
+            color: #2C5A2B;
+            text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-decoration: none;
+        }
+    </style>
+</Head>
+<body>
+    <div class="navbar">
+        <div class="navlink">
+            <a id="HomeLink" href="../index.html">Home</a>            
+        </div>
+        <div class="navlink">
+            <a id="PlayLink" href="../PlayablePortfolio/playablePortfolio.html">Level Design</a>
+        </div>
+        <div class="navlink">
+            <a id ="DungeonLink" href="../DungeonGame/dungeon.html">Dungeon Game</a>
+        </div>
+        <div class="navlink">
+            <a id ="MobLink" href="../MobMentality/MobMentality.html">Mob Mentality</a>
+        </div>
+        <div class="navlink">
+            <a id="OTTLink" href="OTTpage.html">One Touch Templar</a>
+        </div>
+    </div>
+    <div class="mainbody">
+        <div class="webglFrame">
+            <div id="unity-container" class="unity-desktop">
+                <canvas id="unity-canvas" width=1280 height=720></canvas>
+                <div id="unity-loading-bar">
+                    <div id="unity-logo"></div>
+                    <div id="unity-progress-bar-empty">
+                        <div id="unity-progress-bar-full"></div>
+                    </div>
+                </div>
+                <div id="unity-warning"> </div>
+                <div id="unity-footer">
+                    <div id="unity-webgl-logo"></div>
+                    <div id="unity-fullscreen-button"></div>
+                    <div id="unity-build-title">Mob Mentality</div>
+                </div>
+            </div>
+        </div>   
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/MobMentality.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/MobMentality.data.unityweb",
+        frameworkUrl: buildUrl + "/MobMentality.framework.js.unityweb",
+        codeUrl: buildUrl + "/MobMentality.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Mob Mentality",
+        productVersion: "0.1.0",
+        showBanner: unityShowBanner,
+      };
+        
+        
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "1280px";
+        canvas.style.height = "720px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+        <div class="textbody">
+            <h1>Controls</h1>
+            <ul>
+                <li>Press and hold X to turn</li>
+                <li>Release X to release the spell in the direction the character is facing</li>
+                <li>Press X again to teleport to the spell's location</li>
+            </ul>
+            <h1>About This Game</h1>
+            <p>
+                This game was created in under two weeks as an individual project in school. I did not create the assets used in the game(they were purchased on the unity asset store).  The only input we were allowed to accept from the player was the "X" key on the keyboard as a restriction for the assignment. 
+            </p>
+        </div>
+    </div>
+</body>
