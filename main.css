@@ -64,8 +64,6 @@ body { padding: 0; margin: 0 }
 .mainbody{
     flex: 1 0 0;
     align-self: stretch;
-    border-left-width: 320px;
-    border-right-width: 320px;
 }
 .pictureframe{
     display: inline-flex;
@@ -100,8 +98,8 @@ body { padding: 0; margin: 0 }
 }
 .webglFrame{
     display: flex;
-    width: 1280px;
-    height: 780px;
+    width: 960px;
+    height: 600px;
     padding: 10px;
     justify-content: center;
     align-items: center;
@@ -117,7 +115,7 @@ body { padding: 0; margin: 0 }
 }
 
 h1{
-    color: #428549;
+    color: #1E60AD;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 32px;
     font-style: normal;
@@ -125,7 +123,7 @@ h1{
     line-height: normal;
 }
 h2{
-        color: #428549;
+        color: #1E60AD;
     font-family: Arial, Helvetica, sans-serif;
 
     font-style: normal;
