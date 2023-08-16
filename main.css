@@ -16,7 +16,7 @@ body { padding: 0; margin: 0 }
 #unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
 
 .navbar{
-    background: #FFBDC9;
+    background: #F3264B;
     display: flex;
     height: 20px;
     padding: 10px 170px;
@@ -30,14 +30,32 @@ body { padding: 0; margin: 0 }
     margin-bottom: 10;
     font-family: Arial, Helvetica, sans-serif;
 }
-.navlink{
-    display: flex;
+.navTitle{    display: flex;
     height: 39px;
     padding: 1px 10px;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    font-family: Arial, Helvetica, sans-serif;}
+.navLink{
+    color: #FFF;
+    text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+.activeNavLink{
+    color: #FFF;
+    text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none; 
 }
 .c_socialLink{
     text-decoration: none;
