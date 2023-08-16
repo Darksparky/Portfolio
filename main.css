@@ -18,7 +18,7 @@ body { padding: 0; margin: 0 }
 .navbar{
     background: #FFBDC9;
     display: flex;
-    height: 70px;
+    height: 20px;
     padding: 10px 170px;
     align-items: center;
     gap: 10px;
