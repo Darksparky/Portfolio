@@ -66,16 +66,19 @@ body { padding: 0; margin: 0 }
     align-self: stretch;
 }
 .pictureframe{
+    float: left;
     display: inline-flex;
-    padding: 10px;
+    padding: 5px;
     align-items: flex-start;
-    gap: 10px;
+    gap: 5px;
     border-radius: 90px;
-    background: #86E38F;
+    background: #1E60AD;
+    margin-left: 10%
 }
 #profilePic{
-    width: 448px;
-    height: 597px;
+    float: left;
+    width: 224px;
+    height: 298px;
     border-radius: 90px;
     border: 1px solid #86E38F;
     background: url(<path-to-image>), lightgray 50% / contain no-repeat;
@@ -137,4 +140,13 @@ p,ul,li{
 
 .textbody{
     transform: translate(6%);
+}
+#AboutAndLinks{
+   width: 80%;
+    display: block;
+    
+}
+#PageSummaries{
+    width: 40%;
+    display: block;    
 }
