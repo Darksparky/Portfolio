@@ -67,7 +67,7 @@ body { padding: 0; margin: 0 }
 }
 .pictureframe{
     float: left;
-    display: inline-flex;
+    display: inline;
     padding: 5px;
     align-items: flex-start;
     gap: 5px;
@@ -142,8 +142,9 @@ p,ul,li{
     transform: translate(6%);
 }
 #AboutAndLinks{
-   width: 80%;
+    width: 80%;
     display: block;
+    justify-self: 
     
 }
 #PageSummaries{
