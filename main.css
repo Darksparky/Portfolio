@@ -60,20 +60,22 @@ body { padding: 0; margin: 0 }
 .c_socialLink{
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
 .mainbody{
     flex: 1 0 0;
     align-self: stretch;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 .pictureframe{
     float: left;
     display: inline;
     padding: 5px;
-    align-items: flex-start;
-    gap: 5px;
     border-radius: 90px;
     background: #1E60AD;
-    margin-left: 10%
+    width: auto;
+    margin: 20;
 }
 #profilePic{
     float: left;
@@ -126,15 +128,19 @@ h1{
     line-height: normal;
 }
 h2{
-        color: #1E60AD;
+    color: #1E60AD;
     font-family: Arial, Helvetica, sans-serif;
-
     font-style: normal;
     font-weight: 700;
     line-height: normal;
 }
+.headerLink{
+    text-decoration: none;
+    color: inherit;
+}
+
 p,ul,li{
-     font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 5pt;
 }
 
@@ -142,12 +148,10 @@ p,ul,li{
     transform: translate(6%);
 }
 #AboutAndLinks{
-    width: 80%;
     display: block;
-    justify-self: 
-    
+    float:  left;
 }
 #PageSummaries{
-    width: 40%;
+    clear: both;
     display: block;    
 }
