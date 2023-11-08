@@ -118,23 +118,24 @@
         canvas.style.height = "540px";
       }
 
-      loadingBar.style.display = "block";
-
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      var loadButton = document.querySelector("#unity-load-button");
-    loadButton.addEventListener("click", function() {
-    createUnityInstance(canvas, config, (progress) => {
-      progressBarFull.style.width = 100 * progress + "%";
-    }).then((unityInstance) => {
-      loadingBar.style.display = "none";
-      loadButton.style.display = "none";
-      loadButton.disabled = true;
-      fullscreenButton.onclick = () => {
+        loadingBar.style.display = "none";
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        var loadButton = document.querySelector("#unity-load-button");
+        loadButton.addEventListener("click", function() {
+        createUnityInstance(canvas, config, (progress) => {
+        loadingBar.style.display = "block";
+        progressBarFull.style.width = 100 * progress + "%";
+        loadButton.style.display = "none";
+        }).then((unityInstance) => {
+        loadingBar.style.display = "none";
+        loadButton.style.display = "none";
+        loadButton.disabled = true;
+        fullscreenButton.onclick = () => {
         unityInstance.SetFullscreen(1);
-      };
-    }).catch((message) => {
-      alert(message);
+        };
+        }).catch((message) => {
+        alert(message);
     });
   });
   loadButton.addEventListener("click", function() {
