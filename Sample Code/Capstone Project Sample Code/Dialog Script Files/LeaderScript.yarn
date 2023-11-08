@@ -1,0 +1,290 @@
+﻿title: LeaderIntroduction
+--- 
+Celestina: You should go talk to my husband. I heard he had something he wanted your help with. 
+Celestina: He's over there <color=yellow>harvesting the crops</color> right now.   #line:08418e7 
+===
+
+title: LeaderTalkedHusband
+--- 
+Celestina: They say this world used to never change, and that you could find large communities of people living together. Apparently even the moonstones used to be all one giant rock floating in the sky!  #line:0c07d49 
+Celestina: It would be so cool to be able to meet so many people.  
+Celestina: Maybe one day we will be able to start our own community. #line:04acd3d 
+===
+
+title: LeaderItemHandin
+---
+<<if $received == "null" or $pluralName == "null">>
+    <<if $itemcount == 0>>
+    <<else>>
+        <<if $itemcount == 1>>
+            Celestina: Thank you. I will put this to great use. 
+        <<else>>
+            Celestina: Thank you. I will put these to great use. 
+        <<endif>>
+    <<endif>>
+<<else>>
+        <<if $itemcount == 1>>
+            Celestina: Thank you so much for the {$received}!
+        <<else>>
+            Celestina: Thank you so much for the {$pluralName}!
+        <<endif>>
+<<endif>>    
+<<set $received = "null">>
+<<set $pluralName = "null">>
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderCheckForNode
+---
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump LeaderOptions>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+title: LeaderCheckForNodeItem
+---
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump LeaderItemHandin>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+title: LeaderOptions
+---
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+-> Talk    
+    <<determineTalkNode DialogueSystem {$characterName} "$nextNode" >>
+    <<if $nextNode == "null">>
+        Failed to find next node.
+        <<jump {$characterName}>>
+    <<else>>
+        <<jump {$nextNode}>>
+    <<endif>>
+-> Give Item
+    <<openHandin DialogueSystem {$characterName}>>
+-> Leave
+===
+title: LeaderBusy
+---
+<<set $nextNode = "null">>
+<<set $characterName = "Leader">>
+<<Ignore DialogueSystem {$characterName}>>
+Celestina: Sorry I am in the middle of something right now. 
+===
+
+title: LeaderBadMapWrongLandmark
+---
+Celestina: Oh? You have a map for me?
+Celestina: I don't really need a map to this, but I suppose someone else might. Take this back.   
+===
+
+title: LeaderBadMapPinFar
+---
+Celestina: Oh? You have a map for me?
+Celestina: I'm sorry, but your map doesn't look like it is very <color=yellow>accurate</color>. Here, have it back.
+Celestina: I sent Joe out that way earlier, and I am sure he would have told me if what I am looking for is where you have it on the map. 
+===
+
+title: LeaderBadMapNoPath
+---
+Celestina: Oh? You have a map for me?
+Celestina: I am going to need you to <color=yellow>draw a path</color> on the map for Joe to follow because he gets lost easily.
+Celestina: Here, take the map back, and please try again.  
+===
+
+title: LeaderBadMapNoPin
+---
+Celestina: Oh? You have a map for me?
+Celestina: Here, take this back. Can you <color=yellow>mark the exact location</color> on the maps you give me. 
+Celestina: Joe needs really detailed instructions just to find his socks.  
+===
+
+title: LeaderBadMapOldMap
+---
+Celestina: Oh? You have a map for me?
+Celestina: This is a map of an <color=yellow>old world</color>. I know it's a bother but you have to remake them when the world shifts. 
+Celestina: Joe would probably tell you to keep it, but I don't see much use in that. Either way, have it back. I don't want it.  
+===
+
+title: LeaderBadMapNotAsked
+---
+Celestina: Oh? You have a map for me?
+Celestina: I don't need a map right now, but I suppose someone else could. Take this back. 
+===
+
+title: LeaderNeutralMapLongPath
+---
+Celestina: Oh? You have a map for me?
+Celestina: This seems like a long walk. Are you sure you couldn't find a <color=yellow>shorter route</color>? 
+Celestina: I'll definitely need to send Joe out for this one, but thanks for the map.
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderNeutralMapPathNotLeadToPin
+---
+Celestina: Oh? You have a map for me?
+Celestina: I think I can fill in the blanks, but next time try and draw the <color=yellow>whole path</color> there. 
+Celestina: Thank you for the map either way though. 
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderNeutralMapPathNotStartHome
+---
+Celestina: Oh? You have a map for me?
+Celestina: In the future you should try and give a better frame of reference by <color=yellow>starting the path here</color> at our home. 
+Celestina: Thank you for the map though. 
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderGoodMap
+---
+Celestina: Oh? You have a map for me?
+<<set $characterName = "Leader">>
+<<LoveAnimation DialogueSystem {$characterName}>>
+Celestina: You're pretty good at this map-making thing. Thank you!
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderFoodQuestStart
+---
+Celestina: Did the others ask you to do anything?
+Celestina: While you are out exploring could you keep an eye out for any wild food I could get Joe to harvest?
+Celestina: You are welcome to use the <color=yellow>flags</color> by the house to <color=yellow>help you make your maps</color>. 
+<<giveQuest DialogueSystem "LeaderFoodQuest">>
+===
+
+title: LeaderFoodQuestProgress_1
+---
+Celestina: It's important to try and keep as large of a variety in food stocks as possible.
+===
+
+title: LeaderFoodQuestProgress_2
+---
+Celestina: We are also running low on moonstone shards since we just keep finding faded ones. 
+Celestina: But for now just let me know if you find any food. 
+===
+
+title: LeaderFoodQuestComplete
+---
+Celestina: Joe will be eager to have something else to eat. Thank you.
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>> 
+===
+
+title: LeaderTreasureQuestStart
+---
+Celestina: Could I ask you for another favor?
+Celestina: My mother used to say the gods don't value the same things as people, but I found that occasionally the sun god recalls lost valuables into existence.
+Celestina: Either way, let me know if you see anything like this, since we might still have a use for them. 
+<<giveQuest DialogueSystem "LeaderTreasureQuest">>
+===
+
+title: LeaderTreasureQuestProgress
+---
+Celestina: Keep an eye out for something that might contain valuables. 
+===
+
+title: LeaderTreasureQuestComplete
+---
+Celestina: I'll send Joe to see if there's anything valuable in it. Thank you. 
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderImpactSiteStart
+---
+Celestina: By the way, the other night I saw something bright fall from the sky and I haven't been able to sleep properly since.
+Celestina: I can't stop thinking about it. What if it's a bad omen? Could you please look into it for me?
+<<giveQuest DialogueSystem "LeaderImpactSite">>
+===
+
+title: LeaderImpactSiteReset
+---
+Celestina: With the world changing the way it did, I'm not sure that impact site is still where you have it on the map. 
+Celestina: Could you make a new map?
+===
+
+title: LeaderImpactSiteProgress
+---
+Celestina: Was it a falling star? Would that be a bad omen then?
+===
+
+
+title: LeaderImpactSiteActivationProgress
+---
+Celestina: We need to activate the moonstone so it doesn't disappear.
+===
+
+title: LeaderImpactSiteActivateCutscene
+---
+Celestina: With a chunk of moonstone that large, we might actually be able to start a community with even more people.
+Celestina: Thank you so much for finding it! I'm going to get Joe to help harvest this right away.
+===
+
+
+title: LeaderImpactSiteComplete
+---
+Celestina: You really helped make my dream come true, and I wanted to thank you again for that. 
+Celestina: There will be way more space for a community over there. We just need to clean it up a bit. 
+<<PlayCredits DialogueSystem>>
+<<set $characterName = "Leader">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: LeaderSunGod
+---
+Celestina: When I think about how the sun is really the eye of a god, it honestly creeps me out a bit. 
+Celestina: I don't really know what to think of it watching us all the time like that, but because of the gods night can be dangerous too. 
+Celestina: Either way I'm going to have to get Joe to go get that food soon. I just want him back as soon as possible.
+===
+
+title: LeaderHelping
+---
+Celestina: You've been so helpful towards the rest of town.
+Celestina: It's difficult work trying to keep everyone from disappearing, but with the work you put in recently we might actually have the time to look for more people.
+===

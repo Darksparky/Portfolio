@@ -1,0 +1,17 @@
+Note that this file did actually exist in the capstone project files as is. 
+
+Good Reference: https://www.gamedeveloper.com/disciplines/8-key-principles-of-writing-effective-game-dialogue
+
+Quality Rules:
+
+1. Be as concise as possible. (Aim for 30 words or less in a node, 40 if its the archeologist)
+2. Focus on the characters not the lore. Dialogue should reflect how they would be feeling/behaving in their situations. 
+3. DO NOT force lore into a line it is not needed in. 
+4. Don't give away NPC intentions for no reason. 
+5. Most people wont remember what is said so don't get stuck on one liners and single thoughts. 
+
+Character Rules:
+
+1. The immortal's dialogue should always say "Old Man" and not "Immortal"
+ 
+

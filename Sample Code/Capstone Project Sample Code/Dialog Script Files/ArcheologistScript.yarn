@@ -1,0 +1,291 @@
+﻿title: ArcheologistIntroduction
+tags:
+---
+<<set $characterName = "Archeologist">>
+<<Ignore DialogueSystem {$characterName}>>
+Zelia: Not right now. I am busy.
+===
+
+title: ArcheologistItemHandin
+---
+<<if $received == "null" or $pluralName == "null">>
+    <<if $itemcount == 0>>
+    <<else>>
+        Zelia: Wow! Thank you!
+    <<endif>>
+<<else>>
+        <<if $itemcount == 1>>
+            Zelia: Wow! Thank you for the {$received}!
+        <<else>>
+            Zelia: Wow! Thank you for the {$pluralName}!
+        <<endif>>
+<<endif>>    
+<<set $received = "null">>
+<<set $pluralName = "null">>
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ArcheologistCheckForNode
+---
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem "Archeologist" "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump ArcheologistOptions>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+title: ArcheologistCheckForNodeItem
+---
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump ArcheologistItemHandin>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+title: ArcheologistOptions
+---
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+-> Talk    
+    <<determineTalkNode DialogueSystem {$characterName} "$nextNode" >>
+    <<if $nextNode == "null">>
+        Failed to find next node.
+        <<jump {$characterName}>>
+    <<else>>
+        <<jump {$nextNode}>>
+    <<endif>>
+-> Give Item
+    <<openHandin DialogueSystem "Archeologist">>
+-> Leave
+===
+title: ArcheologistBusy
+---
+<<set $nextNode = "null">>
+<<set $characterName = "Archeologist">>
+<<Ignore DialogueSystem {$characterName}>>
+Zelia: Shhhh - I am trying to focus.
+===
+
+title: ArcheologistBadMapWrongLandmark
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+Zelia: I'm looking for something specific, and this isn't it. Give this to someone else.
+Zelia: Please let me know if you find something else of interest. 
+===
+
+title: ArcheologistBadMapOldMap
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+Zelia: I can tell just by looking at this, it's from a <color=yellow>previous world</color>.
+Zelia: This map is useless now, here throw it away. 
+===
+
+title: ArcheologistBadMapPinFar
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+Zelia: Please don't waste my time with maps like this. Here, have it back.
+Zelia: I've traveled that way recently, and there shouldn't be anything at that location. Did you mark down the <color=yellow>correct location</color>?
+===
+
+title: ArcheologistBadMapNoPath
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go. 
+Zelia: Please don't waste my time with maps like this. Here, have it back.
+Zelia: Next time please <color=yellow>draw a route</color> on the map for me to follow.
+===
+
+title: ArcheologistBadMapNoPin
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go. 
+Zelia: Please don't waste my time with maps like this. Here, have it back.
+Zelia: You should at least <color=yellow>mark down the location</color> you want me to find.
+===
+
+title: ArcheologistBadMapNotAsked
+---
+Zelia: Thank you, but I'm not looking for a map at the moment.
+Zelia hands you back the map.
+===
+
+title: ArcheologistNeutralMapLongPath
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+Zelia: It should do, but the route you marked seems a bit <color=yellow>long</color>. It's at least usable though, so thank you. 
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ArcheologistNeutralMapPathNotLeadToPin
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+Zelia: The route should <color=yellow>lead to the point of interest</color>, but I might be able to use this. Thank you.
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>> 
+===
+
+title: ArcheologistNeutralMapPathNotStartHome
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+Zelia: Your path should <color=yellow>start here</color> at the sanctuary, but the rest seems usable. Thank you. 
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ArcheologistGoodMap
+---
+Zelia: Thank you for the map. Just let me inspect it quickly before you go.
+<<set $characterName = "Archeologist">>
+<<LoveAnimation DialogueSystem {$characterName}>>
+Zelia: Wow! What a good looking map!
+Zelia: I can't wait to use this. Thank you.
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>> 
+===
+
+title: ArcheologistLanguageQuestStart
+---
+Zelia: The old man and I have been working on translating ancient languages.
+Zelia: Could you let me know if you come across any ancient writings?
+<<giveQuest DialogueSystem "Archeologist Language Quest">>
+===
+
+title: ArcheologistLanguageProgress
+---
+Zelia: The old man is remarkably good at deciphering old texts.
+Zelia: Let me know if you find anything.
+===
+
+title: ArcheologistLanguageComplete
+---
+Zelia: That location sounds like it contains ancient text.
+Zelia: I'm going to get the old man to help me translate it.
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+
+title: ArcheologistMagicQuestStart
+---
+Zelia: The text you found appears to refer to ancient magicians.
+Zelia: If you could find me some proof of ancient magic that would be amazing.
+<<giveQuest DialogueSystem "Archeologist Magic Quest">>
+===
+
+title: ArcheologistMagicProgress
+---
+Zelia: The idea of uncovering lost magic is like a dream.
+=== 
+
+title: ArcheologistMagicComplete
+---
+Zelia: If you truly did find evidence of magic, then it could change the world as we know it.
+Zelia: I will have to go see for myself to understand it, but I can hardly contain my excitement! 
+
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ArcheologistBusyWork
+---
+Zelia: I have no time for distractions. I'm on the cusp of a breakthrough!
+Zelia: I'll let you know if I need your help again. 
+===
+
+
+title: ArcheologistStonehengeQuestStart
+---
+Zelia: I investigated the location you showed me before, and it appears as though the magicians were able to bring power back to faded moonstone. 
+Zelia: Could you search for more clues pertaining to the restoration of moonstone?
+Zelia: I believe that any clues we might find would be connected to the <color=yellow>gods or the sky</color>. 
+Zelia: This could be the key to humanity's future.
+<<giveQuest DialogueSystem "Archeologist Stonehenge Quest">>
+===
+
+title: ArcheologistStonehengeProgress
+---
+Zelia: Radiant moonstone, like the one in the center of our sanctuary, protects us from the disappearing when the <b>sun god</b> dreams.
+Zelia: Unfortunately it is an incredibly rare resource that we are slowly depleting. 
+===
+
+title: ArcheologistStonehengeReset
+---
+Zelia: The world changed, so that stone monument isn't going to be in the same spot. 
+Zelia: I'd really appreciate a new map to it.  
+===
+
+title: ArcheologistStonehengeActivationProgress
+---
+Zelia: Since there's moonstone in the center of the monument, I wonder what it is used for?
+Zelia: I'd like you to help me investigate it further, so if you could <color=yellow>meet me there</color> I'd really appreciate it!
+===
+
+
+title: ArcheologistStonehengeActivateCutscene
+---
+Zelia: This is incredible! You did it!
+Zelia: The ability to restore faded moonstone could fundamentally give us a taste of freedom thought to have only existed pre-calamity.
+Zelia: I'm going back to the village to tell the others! This is a momentous breakthrough!
+===
+
+title: ArcheologistStonehengeComplete
+---
+Zelia: It doesn't feel real yet. I'm really looking forward to the future now.
+Zelia: What we have learned will change the world. 
+<<set $characterName = "Archeologist">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ArcheologistMonumentalQuestion_1
+---
+Zelia: A while back I saw a little stone monument, and I can't stop thinking about what it might have been used for. 
+===
+
+title: ArcheologistMonumentalQuestion_2
+---
+Zelia: I just can't get the thought of that stone monument out of my head. 
+===
+
+
+title: ArcheologistTranslations
+---
+Zelia: The old man is honestly a bit too good at translating ancient languages, sometimes I just don't understand how. 
+Zelia: With his advice, I should be able to translate it pretty quickly though.  
+===

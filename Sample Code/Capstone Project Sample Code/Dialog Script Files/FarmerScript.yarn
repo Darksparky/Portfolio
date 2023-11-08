@@ -1,0 +1,381 @@
+title: FarmerIntroduction
+position: 619,-406
+---
+Farmer Joe: I'd really appreciate if you would <color=yellow>check-in with everybody</color> to see if they need help <color=yellow>every once in a while</color>. 
+Farmer Joe: You'd need to <color=yellow>check back in with people often</color>. Tina used to do it, but she hasn't been feeling well recently. 
+<<declare $ignorePlayer = false as bool>>
+===
+
+title: FarmerCheckForNode
+position: 619,-262
+---
+<<declare $received = "null" as string>>
+<<declare $characterName = "Farmer" as string>>
+<<declare $nextNode = "null" as string>>
+<<declare $itemcount = 0 as number>>
+<<declare $pluralName = "null" as string>>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump FarmerOptions>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerCheckForNodeItem
+position: 619,-116
+---
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump FarmerItemHandin>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerBusy
+position: -634,-527
+---
+<<set $nextNode = "null">>
+<<set $characterName = "Farmer">>
+<<Ignore DialogueSystem {$characterName}>>
+Farmer Joe: Sorry I am a little busy right now. 
+===
+title:FarmerSomethingNew
+position: -880,-528
+---
+Farmer Joe: Just between you and me, my wife won't stop complaining about eating the same thing everyday. 
+Farmer Joe: If you could bring me something tasty to give her, I'd really appreciate that.
+===
+
+title:FarmerThingsToPlant
+position: -1165,-318
+---
+Farmer Joe: Whenever I take a walk I am always on the lookout for things that we could cultivate. 
+Farmer Joe: My wife always says that variety is the spice of life. 
+=== 
+
+title: FarmerTestLandmark
+position: -1066,-455
+---
+Farmer Joe: Oh whats that on your map? 
+===
+
+title: FarmerTreeHouse
+position: -1287,-446
+---
+Farmer Joe: I'm going to be honest. 
+Farmer Joe: While I love my wife dearly, sometimes I wish I had a place where I could just get away from it all for a bit.  
+===
+
+title: FarmerApplePieStart
+position: 1124,-402
+--- 
+<<declare $numberOfApples to 0>>
+<<getQuestItemCount DialogueSystem "Farmer Apple Pie" "apple" "$numberOfApples">>
+Farmer Joe: My wife is a huge fan of <color=yellow>apples</color>, and I was wondering if you could find me <color=yellow>{$numberOfApples}</color> while you're out so that I can bake her a pie?
+<<declare $testbool to false as bool>>
+<<giveQuest DialogueSystem "Farmer Apple Pie">>
+===
+
+title: FarmerFindApplesGoal
+position: 1341,-402
+---
+Farmer Joe: I just can't stop thinking about the taste of fresh <color=yellow>apple</color> pie....
+===
+
+title: FarmerFindApplesGoal2
+---
+<<Ignore DialogueSystem {$characterName}>>
+The farmer whistles while he works.
+===
+
+title: FarmerApplePieComplete
+position: 1555,-402
+---
+Farmer Joe: When the pie is done it will certainly make Tina a little bit happier. 
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerItemHandin
+position: 619,59
+---
+<<if $received == "null" or $pluralName == "null">>
+    <<if $itemcount == 0>>
+    <<else>>
+        <<if $itemcount == 1>>
+            Farmer Joe: Thank you for the item.
+        <<else>>
+            Farmer Joe: Thank you for the items.
+        <<endif>>
+    <<endif>>
+<<else>>
+        <<if $itemcount == 1>>
+            Farmer Joe: Thank you so much for the {$received}!
+        <<else>>
+            Farmer Joe: Thank you so much for the {$pluralName}!
+        <<endif>>
+<<endif>>    
+<<set $received = "null">>
+<<set $pluralName = "null">>
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerBadMapWrongLandmark
+position: 837,-407
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: I was looking for something...you know...different.
+Farmer Joe: Here you can have this back, I guess. 
+===
+
+title: FarmerBadMapPinFar
+position: 837,-264
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: I went that way earlier and there was <color=yellow>nothing out there</color>. 
+You see him rotate the map in his hands. 
+Farmer Joe: Maybe you were looking at it upside down? Here, take it back and try again.
+===
+
+title: FarmerBadMapOldMap
+position: 837,18
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: You do know when the <color=yellow>world changes</color> your old maps become unusable right? 
+Farmer Joe: If you want to keep it as a souvenir you do have that old <color=yellow>storage chest</color> by your house. Just an idea.
+===
+
+title: FarmerBadMapNoPath
+position: 837,154
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: I don't want to get lost, so I'd appreciate it if you'd <color=yellow>draw a path</color> for me to follow.
+Farmer Joe: Take this back and try again. 
+===
+
+title: FarmerBadMapNoPin
+position: 837,-121
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+You watch as the farmer looks puzzled by the piece of paper you handed him.
+Farmer Joe: Please tell me you weren't trying to draw my face. 
+Farmer Joe: Oh! It's a map. Sorry. You have to <color=yellow>pinpoint a location</color> on it for me to understand it. Here, take it and try again. 
+===
+
+title: FarmerBadMapNotAsked
+position: 837,294
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+You watch as the farmer looks puzzled by the piece of paper you handed him.
+Farmer Joe: I don't think this is for me. Here, give it to someone else maybe?
+===
+
+title: FarmerNeutralMapLongPath
+position: 837,430
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: The path looks really long. Try and find a <color=yellow>shorter path</color> next time.
+Farmer Joe: If I am gone too long I'll get in trouble with Tina.
+Farmer Joe: Thanks for the map though. 
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerNeutralMapPathNotLeadToPin
+position: 837,570
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: The path <color=yellow>isn't fully marked</color>, so I guess this will be an adventure.  
+Farmer Joe: Thanks for the map. 
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerNeutralMapPathNotStartHome
+position: 837,718
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+Farmer Joe: The path should at least <color=yellow>start in town</color> so I can get bearings.
+Farmer Joe: This will be an adventure I guess. Thanks. 
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerGoodMap
+position: 837,858
+---
+Farmer Joe: Thanks for the map. Let me take a look at it first.
+<<set $characterName = "Farmer">>
+<<LoveAnimation DialogueSystem {$characterName}>> 
+Farmer Joe: I can't wait to explore this. Thanks for the map!
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerPlaceToPicnicComplete
+position: 1555,-229
+---
+Farmer Joe: Thanks for showing me this spot. The lunch will be great!
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerPlaceToPicnicProgress
+position: 1341,-229
+---
+Farmer Joe: Keep an eye out for a good place for lunch, I'm counting on you!
+===
+
+title: FarmerPlaceToPicnicProgress2
+---
+Farmer Joe: I'm thinking of a place with a really scenic view and a comfortable atmosphere. 
+Farmer Joe: Thanks to you I think she's actually going to like the surprise this time.
+===
+
+title: FarmerPlaceToPicnicStart
+position: 1124,-229
+---
+Farmer Joe: The pie is complete, but I was thinking that I want to do something romantic for Tina. 
+Farmer Joe: Maybe I could take her <color=yellow>somewhere nice for lunch</color>.
+Farmer Joe: If you find a spot like that for me I'd really appreciate it!
+<<giveQuest DialogueSystem "FarmerPlaceToPicnic">> 
+===
+
+title: FarmerWellWaterStart
+position: 1124,-74
+---
+Farmer Joe: This time I want to do something even more special.
+Farmer Joe: I am trying to grow a special flower to give to Tina, but this flower requires the <color=yellow>purest of water</color>. 
+Farmer Joe: They say that water that reflects the sun god's gaze is corrupted and changed by it.  
+<<giveQuest DialogueSystem "Farmer Well Water">>
+===
+
+title: FarmerWellWaterProgress
+position: 1341,-74
+---
+Farmer Joe: Hmm, maybe we shouldn't be drinking the rain water either after all. 
+===
+
+title: FarmerWellWaterProgress2
+---
+Farmer Joe: If you somehow find a place where the water is covered from the sun, please let me know!
+===
+
+title: FarmerWellWaterComplete
+position: 1555,-74
+---
+Farmer Joe: The well water will be perfect for the flower!
+Farmer Joe: Oh! Maybe I should build a well right here at home, maybe that's something she'd finally appreciate.
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerLoveTreeStart
+position: 1124,79
+---
+Farmer Joe: As much as I love my wife, I could really use a night away from her every once in a while. 
+Farmer Joe: Sometimes I just want to do things for myself. Like building a tree house, somewhere I could get some time to myself.
+Farmer Joe: I know Tina would think it's a waste of time, so keep this between you and me, but let me know if you find somewhere suitable for me to build myself a hideout.  
+<<giveQuest DialogueSystem "Farmer Love Tree">> 
+===
+
+title: FarmerLoveTreeProgress
+position: 1341,79
+---
+Farmer Joe: There's a lot of old abandoned structures out there, but I really just want to build something for myself. 
+Farmer Joe: I'd much prefer a large tree, one that I could build on and make my own.
+=== 
+
+title: FarmerLoveTreeProgress2
+---
+Farmer Joe: Please don't tell Tina. I love her, but I need a place for just myself.
+=== 
+
+title: FarmerLoveTreeReset
+position: 1555,79
+---
+Farmer Joe: That tree would have been perfect! Too bad it could be anywhere now. If you ever find something like it again, I'll need a new map. 
+===
+
+title: FarmerLoveTreeActivationProgress
+position: 1777,78
+---
+Farmer Joe: That tree would be perfect, but with the world constantly changing any house I built there would change along with it.
+Farmer Joe: Wait just a second. You were able to turn the faded moonstone radiant again on that stone monument with Zelia weren't you?
+Farmer Joe: If we could do that to the moonstone under that tree so it doesn't disappear, it would make for a permanent hideaway!
+===
+
+title: FarmerActivateLoveTreeCutscene
+---
+Farmer Joe: You're amazing! I can finally make myself a place all my own.
+Farmer Joe: Don't tell her about this spot. Keep this between you and me.
+Farmer Joe: I have to go get building materials right away! 
+===
+
+title: FarmerLoveTreeComplete
+position: 1994,77
+---
+Farmer Joe: Thanks for the help! I'm excited that I'll be able to create my own little secret base.
+Farmer Joe: I just have to get my tools prepared, but I'll build it in no time. 
+Farmer Joe: Also, don't tell her I said this, but I'm looking forward to a good night's sleep. She just snores so loud. 
+<<set $characterName = "Farmer">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: FarmerBaking
+---
+Farmer Joe: I might as well continue with work while I wait for the pie to finish. 
+Farmer Joe: Don't forget to check back in with everyone every once in a while. 
+===
+
+title: FarmerOverworked
+---
+Farmer Joe: I'm pretty busy right now, sorry! We just got back, but she's already put me to work.  
+===
+
+title: FarmerFlowersGrowSlow
+---
+Farmer Joe: It's silly of me to say this as a farmer, but sometimes I forget that flowers don't grow instantly with the world changing all the time like it does. 
+Farmer Joe: Oh yeah! Don't forget to check in with the others.
+===

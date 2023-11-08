@@ -1,0 +1,282 @@
+﻿title: ImmortalIntroduction
+tags:
+---
+<<set $characterName = "Immortal">>
+<<set $ignorePlayer = true>>
+<<Ignore DialogueSystem {$characterName}>>
+The old man looks lost in thought. He doesn't seem to notice you. 
+===
+title: ImmortalWalkingStick
+---
+ The old man looks lost in thought.
+ Old Man: Walking sticks are very useful.
+ Old Man: I use mine for balance and for smacking people occasionally, but my favorite use for mine is to knock the fruit out of the trees.
+ Old Man: Farmer Joe found an apple tree last year, but he couldn't get any seeds to sprout. 
+===
+
+title: ImmortalGods
+---
+ The old man looks a little down.
+    Old Man: The gods are a real pain aren't they?
+    Zelia: They say this world used to never change, that you could find communities of over a thousand people living together, and that the moon stones used to be all one giant rock floating in the sky! 
+    Zelia: It would be so cool to be able to meet so many people, but I don't envy to people who had to feed them all! *Laughs* 
+===
+
+
+title: ImmortalItemHandin
+---
+<<if $received == "null" or $pluralName == "null">>
+    <<if $itemcount == 0>>
+    <<else>>
+        <<if $itemcount == 1>>
+            Old Man: Thank you. I will put this to great use. 
+        <<else>>
+            Old Man: Thank you. I will put these to great use. 
+        <<endif>>
+    <<endif>>
+<<else>>
+        <<if $itemcount == 1>>
+            Old Man: Thank you. I will put this {$received} to great use.
+        <<else>>
+            Old Man: Thank you. I will put these {$received} to great use.
+        <<endif>>
+<<endif>>    
+<<set $received = "null">>
+<<set $pluralName = "null">>
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalCheckForNode
+---
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump ImmortalOptions>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+title: ImmortalCheckForNodeItem
+---
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<getNode DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode == "null">>
+    <<jump ImmortalItemHandin>>
+<<else>>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalBusy
+---
+<<set $nextNode = "null">>
+<<set $characterName = "Immortal">>
+<<Ignore DialogueSystem {$characterName}>>
+The old man is staring blankly off into the distance and doesn't seem to notice you. 
+===
+
+title: ImmortalBadMapWrongLandmark
+---
+Old Man: I may be old but I can still read. This isn't what I was asking for.
+Old Man: Here take it. Go give it to someone else. 
+===
+
+title: ImmortalBadMapPinFar
+---
+Old Man: I may be old, but I'm not blind. I was just there, and there is <color=yellow>nothing at that location</color>.
+Old Man: Make it better next time, here take it back.  
+===
+
+title: ImmortalBadMapOldMap
+---
+Old Man: This is a map of a <color=yellow>previous world</color>. When it changes you got to make them brand new.
+Old Man: This is worthless now, here you deal with it.  
+===
+
+title: ImmortalBadMapNoPath
+---
+Old Man: You didn't <color=yellow>draw a path</color>? Are you trying?
+Old Man: Take it back and try a little harder.
+===
+
+title: ImmortalBadMapNoPin
+---
+Old Man: Is this a joke? You didn't <color=yellow>place a marker</color> on the location you want to show me.
+Old Man: Take it back and do better next time.
+===
+
+title: ImmortalBadMapNotAsked
+---
+You watch as the old man sneezes and blows his nose in the map you just gave him.
+Old Man: I didn't ask for this. You can have it back I guess.
+===
+
+title: ImmortalNeutralMapLongPath
+---
+Old Man: You know I'm an old man right?
+Old Man: I'd rather not <color=yellow>walk so much</color>, but It'll get me where I want to go, so thanks.
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalNeutralMapPathNotLeadToPin
+---
+Old Man: Next time please draw me the complete path. I'm getting too old for this kind of adventure.
+Old Man: I'll let you off the hook this time though, because I still appreciate the effort. 
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalNeutralMapPathNotStartHome
+---
+
+Old Man: The path should start here, where we live. This isn't hard.
+Old Man: I appreciate the map though.
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalGoodMap
+---
+<<set $characterName = "Immortal">>
+<<LoveAnimation DialogueSystem {$characterName}>>
+Old Man: This looks useful. I appreciate it. 
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForContinuedDialogue DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalWrittenInStoneStart
+---
+Old Man: A lot can be learned from stones.
+Old Man: Let me know if you find any that might have deeper meaning.
+<<giveQuest DialogueSystem "ImmortalWrittenInStoneQuest">> 
+===
+
+title: ImmortalWrittenInStoneProgress
+---
+Old Man: A stone doesn't need words to be carved into it for you to learn from it. 
+===
+
+title: ImmortalWrittenInStoneProgress2
+---
+Old Man: Stones might provide meaning to those who can discern it. 
+===
+
+title: ImmortalWrittenInStoneComplete
+---
+Old Man: These kinds of things are fascinating because they could give us insight into <color=yellow>where and when</color> they were recalled from.
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalOldCultStart
+---
+Old Man: This is important, so listen to me. 
+Old Man: Objects of occult worship have been occasionally popping up around here recently. 
+Old Man: If you find one I'd like you to let me know. It's important that we prevent future worship of false gods. 
+<<giveQuest DialogueSystem "Immortal Old Cult">>
+===
+
+title: ImmortalOldCultProgress
+---
+Old Man: The promises of the false gods can have awful consequences.
+===
+
+title: ImmortalOldCultComplete
+---
+Old Man: Keep the occult issue between us. I will deal with it later. 
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalMagicTowerStart
+---
+Old Man: I have another request for you. It seems like someone is living nearby.
+Old Man: If the sun god has recently <color=yellow>recalled</color> them it's imperative we find them soon. They may not be aware of the troubles of the world. 
+<<giveQuest DialogueSystem "ImmortalMagicTower">>
+===
+
+
+title: ImmortalMagicTowerReset
+---
+Old Man: With the world having changed the way it did, the map to the tower that you gave me is no longer good.
+Old Man: I hope for their sake you find it again, when that time comes I will need a new map. 
+===
+
+title: ImmortalMagicTowerProgress
+---
+Old Man: When the sun god recalls the world there is no guarantee things will be the same. 
+Old Man: You have to find where they're living before they're gone again. 
+===
+
+title: ImmortalMagicTowerProgress2
+---
+Old Man: The sun is barely keeping everything together, so why are you wasting time here? Go find our neighbour. 
+===
+
+title: ImmortalMagicTowerActivationProgress
+---
+Old Man: If you could bring the moonstone back to life, the tower and everything inside would at least be safe. 
+===
+
+title: ImmortalMagicTowerActivateCutscene
+---
+Old Man: She refuses to talk, but at least we know she's safe with radiant moonstone. 
+===
+
+title: ImmortalMagicTowerComplete
+---
+Old Man: Thank you again for helping find that lady.
+Old Man: It will take some time but she'll want to talk eventually. 
+<<set $characterName = "Immortal">>
+<<set $nextNode = "null">>
+<<CheckForQuest DialogueSystem {$characterName} "$nextNode">>
+<<if $nextNode != "null">>
+    <<jump {$nextNode}>>
+<<endif>>
+===
+
+title: ImmortalGodsIntent
+---
+Old Man: Honestly the stones weren't that useful because they could be from anywhere in the world and from anypoint in history, but I'm always fascinated by what gets recalled. 
+Old Man: Sometimes you have to wonder what the guy in the sky is thinking, bringing back the things that he does. 
+Old Man: Anyway, I will let you know if something else piques my interest.   
+===
+
+title: ImmortalMoon
+---
+Old Man: The moon used to be the goddess of dreams and memories before she fell from the sky. 
+Old Man: The guy up there isn't a very good replacement, so things go wrong all the time.
+Old Man: You've been helpful, so I'll let you know when I need help again.  
+===

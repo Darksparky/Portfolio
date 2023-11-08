@@ -1,0 +1,54 @@
+﻿title: ObjectGraveyardInteract
+tags:
+---
+The epitaphs are written in a language you do not comprehend.
+Even without comprehending the language, it is clear that people had a lot to say about the tombstone's owner.  
+===
+
+title: ObjectLibraryInteract
+---
+The books here are written in a language you have never seen before. 
+===
+
+title: ObjectEngravedWallInteract
+---
+The wall appears to be absolutely filled with engravings in a strange text. 
+===
+
+title: NightWarning
+---
+It's getting late, and I can feel the world shifting. I better hurry home.
+===
+
+title: ObjectSanctuaryMoonstone
+---
+The gentle purple glow of the moonstone reassures you that you will be safe from the changing world.
+===
+
+
+title: ObjectMagicTowerDoor
+---
+Woman: I don't know who you are, but go away. 
+===
+
+
+title: TestingActivationGoalDialogue
+---
+Testing: Testing activation goal dialogue. Touch the moonstone center.
+===
+
+title: TestingFirstGoalDialogue
+---
+Testing: Testing first goal dialogue. Give me an apple.  
+===
+
+title: TestingQuestStart
+---
+<<giveQuest DialogueSystem "TestingQuest">>
+Starting testing quest.
+===
+
+title: TestingQuestEnd
+---
+Ending testing quest.
+===
